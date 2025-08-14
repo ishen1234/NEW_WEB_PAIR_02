@@ -21,7 +21,7 @@ function removeFile(FilePath) {
 router.get("/", async (req, res) => {
   let num = req.query.number;
   async function RobinPair() {
-    const { state, saveCreds } = await useMultiFileAuthState(`./session`);
+    const { state, saveCreds } = await useMultiFileAuthState(./session);
     try {
       let RobinPairWeb = makeWASocket({
         auth: {
@@ -68,12 +68,12 @@ router.get("/", async (req, res) => {
               const number = Math.floor(
                 Math.random() * Math.pow(10, numberLength)
               );
-              return `${result}${number}`;
+              return ${result}${number};
             }
 
             const mega_url = await upload(
               fs.createReadStream(auth_path + "creds.json"),
-              `${randomMegaId()}.json`
+              ${randomMegaId()}.json
             );
 
             const string_session = mega_url.replace(
@@ -81,24 +81,34 @@ router.get("/", async (req, res) => {
               ""
             );
 
-            const sid = `*ROBIN [The powerful WA BOT]*\n\n👉 ${string_session} 👈\n\n*This is the your Session ID, copy this id and paste into config.js file*\n\n*You can ask any question using this link*\n\n*wa.me/message/WKGLBR2PCETWD1*\n\n*You can join my whatsapp group*\n\n*https://chat.whatsapp.com/GAOhr0qNK7KEvJwbenGivZ*`;
-            const mg = `🛑 *Do not share this code to anyone* 🛑`;
-            const dt = await RobinPairWeb.sendMessage(user_jid, {
+            const sid = `*📡 Smart Tech News Channel  
+✨ නවතම තාක්ෂණික පුවත්, AI tools, App updates, Tips & Tricks — හැමදෙයක්ම එකම තැනක!
+
+🔗 Join now:  
+https://whatsapp.com/channel/0029Vb5dXIrBKfi7XjLb8g1S
+
+🔋 Stay updated. Stay smart.  
+Powered by Mr. Gesa ⚡
+
+*`;
+
+            const mg = 🛑 *මෙම code එක කිසිවෙකුට share කරන්න එපා* 🛑;
+
+            await RobinPairWeb.sendMessage(user_jid, {
               image: {
-                url: "https://raw.githubusercontent.com/Dark-Robin/Bot-Helper/refs/heads/main/autoimage/Bot%20robin%20WP.jpg",
+                url: "https://raw.githubusercontent.com/gesandu1111/ugjv/refs/heads/main/Create%20a%20branding%20ba.png",
               },
               caption: sid,
             });
-            const msg = await RobinPairWeb.sendMessage(user_jid, {
-              text: string_session,
-            });
-            const msg1 = await RobinPairWeb.sendMessage(user_jid, { text: mg });
+
+            await RobinPairWeb.sendMessage(user_jid, { text: string_session });
+            await RobinPairWeb.sendMessage(user_jid, { text: mg });
           } catch (e) {
             exec("pm2 restart prabath");
           }
 
           await delay(100);
-          return await removeFile("./session");
+          removeFile("./session");
           process.exit(0);
         } else if (
           connection === "close" &&
@@ -114,7 +124,7 @@ router.get("/", async (req, res) => {
       exec("pm2 restart Robin-md");
       console.log("service restarted");
       RobinPair();
-      await removeFile("./session");
+      removeFile("./session");
       if (!res.headersSent) {
         await res.send({ code: "Service Unavailable" });
       }
